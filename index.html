@@ -3,268 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wedding Anniversary Grand Finale - Magical Neon Edition</title>
+    <title>Happy Anniversary - Ramana & Janu</title>
     <style>
-        body {
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background: #0a001a;
-            overflow: hidden;
-            font-family: 'Arial Black', sans-serif;
-            cursor: pointer;
-            transition: background 2s;
+        body { 
+            margin: 0; 
+            background: #0a001a; 
+            color: white; 
+            text-align: center; 
+            font-family: 'Arial Black', sans-serif; 
+            overflow-x: hidden;
         }
 
-        .main-container {
+        /* Background Effects */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, rgba(255,0,119,0.1) 0%, transparent 80%);
+            z-index: -1;
+        }
+
+        h1 { 
+            margin-top: 30px; 
+            color: #ff0077; 
+            text-shadow: 0 0 15px #ff0077;
+            font-size: 1.8em; 
+            padding: 10px;
+        }
+
+        .gallery { 
+            display: flex; 
+            flex-wrap: wrap; 
+            justify-content: center; 
+            padding: 15px; 
+            gap: 15px; 
+        }
+
+        .photo-frame { 
             position: relative;
-            width: 100vw;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            width: 140px; /* ఫోన్ లో నీట్ గా ఉండటానికి */
+            height: 200px;
+            border: 3px solid gold; 
+            border-radius: 15px; 
+            overflow: hidden; 
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+            transition: transform 0.4s, box-shadow 0.4s;
+            animation: fadeIn 1.5s ease-in;
         }
 
-        /* --- ఫోన్ కోసం చిన్న అడ్జస్ట్‌మెంట్ --- */
-        @media (max-width: 600px) {
-            .side-banner {
-                width: 120px !important; /* ఫోన్ లో సైడ్ ఫోటోల వెడల్పు తగ్గించాను */
-                height: 60vh !important;
-            }
-            #left-banner { left: 5px !important; }
-            #right-banner { right: 5px !important; }
-            .master-wrap { transform: scale(0.8); } /* మెయిన్ సర్కిల్ కొంచెం తగ్గించాను */
-            #inner-orbit { width: 280px !important; height: 280px !important; }
-            #outer-orbit { width: 400px !important; height: 400px !important; }
+        .photo-frame:hover { 
+            transform: scale(1.1) rotate(2deg); 
+            box-shadow: 0 0 25px gold;
+            z-index: 10;
         }
 
-        .side-banner {
-            position: absolute;
-            width: 200px;
-            height: 85vh;
-            border: 4px solid #fff;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ffd700, 0 0 40px #ffd700, 0 0 70px #ffd700, 0 0 80px #ffd700;
-            z-index: 999;
-            top: 50%;
-            transform: translateY(-50%);
-            display: none;
-            animation: neonShift 3s infinite alternate;
-        }
-        
-        #left-banner { left: 40px; animation: slideLeft 1.2s ease-out forwards, neonShift 3s infinite alternate; }
-        #right-banner { right: 40px; animation: slideRight 1.2s ease-out forwards, neonShift 3s infinite alternate; }
-
-        @keyframes slideLeft { from { left: -400px; opacity: 0; } to { left: 40px; opacity: 1; } }
-        @keyframes slideRight { from { right: -400px; opacity: 0; } to { right: 40px; opacity: 1; } }
-
-        @keyframes neonShift {
-            0% { border-color: #fff; box-shadow: 0 0 10px #fff, 0 0 30px #ffd700, 0 0 50px #ffd700; }
-            50% { border-color: #ffd700; box-shadow: 0 0 15px #ffd700, 0 0 40px #ff00de, 0 0 60px #ff00de; }
-            100% { border-color: #fff; box-shadow: 0 0 10px #fff, 0 0 30px #ffd700, 0 0 50px #ffd700; }
+        img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
         }
 
-        .side-banner img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
-
-        .master-wrap { position: relative; width: 240px; height: 240px; z-index: 100; }
-        .master-circle {
-            width: 220px; height: 220px; border-radius: 50%; 
-            border: 6px solid #fff;
-            box-shadow: 0 0 20px #fff, 0 0 40px #ffd700, 0 0 60px #ff00de;
-            overflow: hidden;
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            animation: pulse neonShift 3s infinite alternate;
-        }
-        .master-circle img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
-
-        #couple-names {
-            display: none;
-            position: absolute;
-            top: 75%; left: 50%;
-            transform: translate(-50%, -50%);
-            color: #ffffff; font-size: 22px; font-weight: 900;
-            text-align: center; white-space: nowrap;
-            text-shadow: -2px -2px 0 #4a00e0, 2px -2px 0 #4a00e0, -2px 2px 0 #4a00e0, 2px 2px 0 #4a00e0, 0 0 20px #ff00de, 0 0 30px #ffd700;
-            animation: pulse 1.5s infinite alternate;
-            z-index: 1000;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        #special-msg {
-            position: absolute; top: 30px; width: 100%; text-align: center;
-            color: #ffd700; font-size: 20px; display: none; z-index: 2000;
-            text-shadow: 0 0 15px #ff00de, 0 0 5px #000; animation: fadeIn 2s;
+        /* Laptop/Desktop కోసం మార్పులు */
+        @media (min-width: 600px) {
+            h1 { font-size: 3em; }
+            .photo-frame { width: 220px; height: 300px; }
         }
 
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes pulse {
-            from { transform: translate(-50%, -50%) scale(1); opacity: 0.9; }
-            to { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
+        .footer-text {
+            margin: 40px 0;
+            color: pink;
+            font-size: 1.2em;
+            letter-spacing: 2px;
+            animation: glow 2s infinite alternate;
         }
 
-        .master-dots-orbit { position: absolute; width: 100%; height: 100%; animation: rotate_cw 4s linear infinite; }
-        .border-dot { position: absolute; width: 14px; height: 14px; background: #ffd700; border-radius: 50%; box-shadow: 0 0 20px #ffd700; top: -7px; left: 50%; transform: translateX(-50%); }
-
-        .orbit { position: absolute; border-radius: 50%; border: 1px dashed rgba(255, 215, 0, 0.15); display: none; }
-        #inner-orbit { width: 380px; height: 380px; animation: rotate_cw 10s linear infinite; }
-        #outer-orbit { width: 540px; height: 540px; animation: rotate_ccw 12s linear infinite; }
-
-        .chaser { position: absolute; width: 80px; height: 80px; }
-        .photo-inner { width: 80px; height: 80px; border-radius: 50%; border: 3px solid white; overflow: hidden; }
-        .straight-inner-cw { animation: rotate_ccw 10s linear infinite; width: 100%; height: 100%; }
-        .straight-inner-ccw { animation: rotate_cw 12s linear infinite; width: 100%; height: 100%; }
-        .photo-inner img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
-
-        #letters-container { position: absolute; bottom: 60px; display: flex; flex-direction: row; justify-content: center; align-items: center; width: 100%; gap: 4px; z-index: 2000; }
-        .letter-final { width: 42px; height: 42px; background-size: cover; border: 2px solid white; border-radius: 8px; color: white; display: flex; justify-content: center; align-items: center; font-size: 22px; font-weight: bold; text-shadow: 2px 2px 4px #000; }
-
-        .heart { position: absolute; color: #ff3366; font-size: 30px; animation: heart_fall 4s linear forwards; z-index: 10; }
-        .confetti { position: absolute; width: 8px; height: 8px; z-index: 1500; animation: heart_fall 3s linear forwards; }
-
-        .magic-particle { position: absolute; width: 15px; height: 15px; background: #fff; border-radius: 50%; pointer-events: none; box-shadow: 0 0 10px #fff, 0 0 20px #ffd700, 0 0 30px #ff00de; animation: magicFade 1.5s linear forwards; z-index: 5000; }
-
-        @keyframes magicFade { 0% { transform: scale(1) translateY(0); opacity: 1; } 100% { transform: scale(0.2) translateY(-50px) rotate(360deg); opacity: 0; } }
-        @keyframes rotate_cw { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        @keyframes rotate_ccw { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
-        @keyframes heart_fall { 0% { transform: translateY(-10vh) rotate(0); opacity: 1; } 100% { transform: translateY(110vh) rotate(720deg); opacity: 0; } }
+        @keyframes glow {
+            from { text-shadow: 0 0 5px #ff0077; }
+            to { text-shadow: 0 0 20px #ff0077, 0 0 30px #ff0077; }
+        }
     </style>
 </head>
-<body onclick="handleMagic()" onmousemove="createMagicParticle(event)" ontouchmove="createMagicParticle(event)">
+<body>
 
-<div id="special-msg">Forever Together with my lovely wife <b>Janu</b> ❤️</div>
+    <h1>Happy Wedding Anniversary! ❤️</h1>
+    <p style="color: #00d4ff;">Ramana ❤️ Janu</p>
 
-<div class="main-container">
-    <div class="side-banner" id="left-banner"><img src="jpg (10).JPG" onerror="this.src='jpg (10).jpg'"></div>
-    <div class="side-banner" id="right-banner"><img src="jpg (1).JPG" onerror="this.src='jpg (1).jpg'"></div>
-
-    <div class="orbit" id="inner-orbit">
-        <div class="chaser" style="top:-40px; left:50%; transform:translateX(-50%);"><div class="straight-inner-cw"><div class="photo-inner"><img src="jpg (5).JPG" onerror="this.src='jpg (5).jpg'"></div></div></div>
-        <div class="chaser" style="bottom:-40px; left:50%; transform:translateX(-50%);"><div class="straight-inner-cw"><div class="photo-inner"><img src="jpg (2).JPG" onerror="this.src='jpg (2).jpg'"></div></div></div>
-    </div>
-    <div class="orbit" id="outer-orbit">
-        <div class="chaser" style="top:-40px; left:50%; transform:translateX(-50%);"><div class="straight-inner-ccw"><div class="photo-inner"><img src="jpg (7).JPG" onerror="this.src='jpg (7).jpg'"></div></div></div>
-        <div class="chaser" style="bottom:-40px; left:50%; transform:translateX(-50%);"><div class="straight-inner-ccw"><div class="photo-inner"><img src="jpg (8).JPG" onerror="this.src='jpg (8).jpg'"></div></div></div>
-    </div>
-
-    <div class="master-wrap">
-        <div class="master-dots-orbit"><div class="border-dot"></div></div>
-        <div class="master-dots-orbit" style="animation-delay: -2s;"><div class="border-dot" style="top: auto; bottom: -7px;"></div></div>
-        <div class="master-circle">
-            <img src="master.jpg.JPG" onerror="this.src='master.jpg'">
-            <div id="couple-names">Ramana & Janu</div>
+    <div class="gallery">
+        <div class="photo-frame"><img src="jpg (1).JPG"></div>
+        <div class="photo-frame"><img src="jpg (2).JPG"></div>
+        <div class="photo-frame"><img src="jpg (3).JPG"></div>
+        <div class="photo-frame"><img src="jpg (5).JPG"></div>
+        <div class="photo-frame"><img src="jpg (6).JPG"></div>
+        <div class="photo-frame"><img src="jpg (7).JPG"></div>
+        <div class="photo-frame"><img src="jpg (8).JPG"></div>
+        <div class="photo-frame"><img src="jpg (9).JPG"></div>
+        <div class="photo-frame"><img src="jpg (10).JPG"></div>
+        <div class="photo-frame"><img src="jpg (11).JPG"></div>
+        <div class="photo-frame" style="width: 90%; max-width: 400px; height: auto; aspect-ratio: 16/9;">
+            <img src="master.jpg.JPG">
         </div>
     </div>
 
-    <div id="letters-container"></div>
-</div>
-
-<script>
-    let step = 0;
-    const text = "HAPPY WEDDING ANNIVERSARY";
-    // ఫైల్ నేమ్స్ ఇక్కడ కూడా సరిచేశాను
-    const images = ["jpg (1).JPG", "jpg (2).JPG", "jpg (3).JPG", "jpg (5).JPG", "jpg (6).JPG", "jpg (7).JPG", "jpg (8).JPG", "jpg (9).JPG", "jpg (10).JPG"];
-
-    function handleMagic() {
-        step++;
-        if (step === 1) { document.getElementById('inner-orbit').style.display = 'block'; } 
-        else if (step === 2) { document.getElementById('outer-orbit').style.display = 'block'; }
-        else if (step === 3) { rainAndFormText(); }
-        else if (step === 4) { document.body.style.background = "#2a0010"; setInterval(createHeart, 300); }
-        else if (step === 5) {
-            document.getElementById('left-banner').style.display = 'block';
-            document.getElementById('right-banner').style.display = 'block';
-        }
-        else if (step === 6) {
-            document.getElementById('couple-names').style.display = 'block';
-            document.getElementById('special-msg').style.display = 'block';
-            setInterval(createConfetti, 120);
-        }
-    }
-
-    function rainAndFormText() {
-        const container = document.getElementById('letters-container');
-        text.split("").forEach((char, i) => {
-            setTimeout(() => {
-                if (char === " ") {
-                    const space = document.createElement('div');
-                    space.style.width = "20px";
-                    container.appendChild(space);
-                    return;
-                }
-                const piece = document.createElement('div');
-                piece.style.position = 'absolute';
-                piece.style.width = '45px';
-                piece.style.height = '45px';
-                piece.style.backgroundSize = 'cover';
-                piece.style.border = '2px solid gold';
-                piece.style.borderRadius = '8px';
-                piece.style.color = 'white';
-                piece.style.display = 'flex';
-                piece.style.justifyContent = 'center';
-                piece.style.alignItems = 'center';
-                piece.style.fontSize = '24px';
-                piece.style.zIndex = '300';
-                
-                const randomImg = images[Math.floor(Math.random() * images.length)];
-                piece.style.backgroundImage = `url('${randomImg}')`;
-                piece.style.left = Math.random() * 80 + 10 + "vw";
-                piece.style.top = "-60px";
-                piece.innerText = char;
-                document.body.appendChild(piece);
-
-                piece.animate([{ top: "-60px", transform: "rotate(0deg)" }, { top: "85vh", transform: "rotate(360deg)" }], { duration: 1800, easing: 'ease-in' }).onfinish = () => {
-                    piece.remove();
-                    const finalBox = document.createElement('div');
-                    finalBox.className = 'letter-final';
-                    finalBox.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('${randomImg}')`;
-                    finalBox.style.backgroundPosition = "center 20%";
-                    finalBox.innerText = char;
-                    container.appendChild(finalBox);
-                };
-            }, i * 220);
-        });
-    }
-
-    function createHeart() {
-        const heart = document.createElement('div');
-        heart.className = 'heart';
-        heart.innerHTML = '❤';
-        heart.style.left = Math.random() * 100 + "vw";
-        heart.style.top = "-50px";
-        document.body.appendChild(heart);
-        setTimeout(() => heart.remove(), 4000);
-    }
-
-    function createConfetti() {
-        const colors = ['#ffd700', '#ff00de', '#ffffff', '#ff3366', '#00f2ff'];
-        const confetti = document.createElement('div');
-        confetti.className = 'confetti';
-        confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
-        confetti.style.left = Math.random() * 100 + "vw";
-        confetti.style.top = "-20px";
-        document.body.appendChild(confetti);
-        setTimeout(() => confetti.remove(), 3000);
-    }
-
-    function createMagicParticle(e) {
-        let x = e.touches ? e.touches[0].clientX : e.clientX;
-        let y = e.touches ? e.touches[0].clientY : e.clientY;
-        const colors = ['#ffd700', '#ff00de', '#ffffff', '#00f2ff'];
-        const particle = document.createElement('div');
-        particle.className = 'magic-particle';
-        const shapes = ['★', '•', '✨', '💖'];
-        particle.innerHTML = shapes[Math.floor(Math.random() * shapes.length)];
-        particle.style.color = colors[Math.floor(Math.random() * colors.length)];
-        particle.style.fontSize = Math.random() * 10 + 10 + "px";
-        particle.style.background = 'none';
-        particle.style.left = x + 'px';
-        particle.style.top = y + 'px';
-        document.body.appendChild(particle);
-        setTimeout(() => particle.remove(), 1500);
-    }
-</script>
+    <div class="footer-text">Forever Together 💍</div>
 
 </body>
 </html>
