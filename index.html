@@ -3,113 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Anniversary Ramana & Janu</title>
+    <title>Happy Anniversary ❤️</title>
     <style>
-        * { box-sizing: border-box; }
-        body { 
-            margin: 0; 
-            background: #000; 
-            color: white; 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            overflow-x: hidden;
+        body {
+            margin: 0; background: #000; color: white;
+            display: flex; flex-direction: column; align-items: center;
+            justify-content: center; min-height: 100vh;
+            font-family: 'Arial', sans-serif; overflow: hidden;
+        }
+        /* మెరిసే నక్షత్రాలు */
+        .stars { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: radial-gradient(circle, #20002c, #000); }
+
+        /* ఫోటో ఫ్రేమ్ */
+        .container {
+            position: relative; width: 300px; height: 450px;
+            perspective: 1000px; cursor: pointer;
+        }
+        .card {
+            width: 100%; height: 100%; position: relative;
+            transform-style: preserve-3d; transition: transform 0.8s;
+            box-shadow: 0 0 30px #ff0077; border-radius: 20px; border: 4px solid gold;
+        }
+        img {
+            width: 100%; height: 100%; object-fit: cover;
+            border-radius: 16px; position: absolute;
+            backface-visibility: hidden;
         }
         
-        /* Magical Background */
-        .stars {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at center, #1b0033 0%, #000 100%);
-            z-index: -1;
+        /* మెసేజ్ స్టైల్ */
+        h1 { color: #ff0077; text-shadow: 0 0 15px #ff0077; font-size: 1.5rem; margin-bottom: 10px; }
+        p { color: gold; font-size: 0.9rem; margin-top: 15px; animation: blink 1.5s infinite; }
+        
+        @keyframes blink { 50% { opacity: 0.3; } }
+        
+        /* Floating Hearts యానిమేషన్ */
+        .heart {
+            position: absolute; color: red; font-size: 20px;
+            animation: float 3s linear infinite; opacity: 0;
         }
-
-        header {
-            padding: 40px 20px;
-            animation: fadeInDown 2s;
-        }
-
-        h1 { 
-            font-size: 2.2em; 
-            color: #ff0077; 
-            text-shadow: 0 0 20px #ff0077; 
-            margin-bottom: 5px;
-        }
-
-        .sub-text { color: gold; font-size: 1.2em; letter-spacing: 2px; }
-
-        /* Photo Grid */
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 15px;
-            padding: 20px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .photo-frame {
-            position: relative;
-            border-radius: 15px;
-            overflow: hidden;
-            border: 2px solid rgba(255, 215, 0, 0.3);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-            animation: fadeInUp 1s ease backwards;
-            aspect-ratio: 3/4;
-        }
-
-        .photo-frame img {
-            width: 100%; height: 100%; object-fit: cover;
-            transition: transform 0.5s;
-        }
-
-        .photo-frame:hover img { transform: scale(1.1); }
-
-        /* Master Photo Special Style */
-        .master-frame {
-            grid-column: 1 / -1;
-            max-width: 400px;
-            margin: 20px auto;
-            border: 3px solid gold;
-            box-shadow: 0 0 30px gold;
-        }
-
-        /* Animations */
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        footer { padding: 50px 20px; color: #ff0077; font-size: 1.5em; animation: pulse 2s infinite; }
-        @keyframes pulse {
-            0% { transform: scale(1); opacity: 0.8; }
-            100% { transform: scale(1.1); opacity: 1; }
+        @keyframes float {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
         }
     </style>
 </head>
-<body>
+<body onclick="changePhoto()">
     <div class="stars"></div>
-    <header>
-        <h1>Happy Wedding Anniversary ❤️</h1>
-        <div class="sub-text">Ramana & Janu</div>
-    </header>
-
-    <div class="gallery">
-        <div class="photo-frame master-frame"><img src="master.jpg.JPG"></div>
-        <div class="photo-frame" style="animation-delay: 0.2s"><img src="jpg (1).JPG"></div>
-        <div class="photo-frame" style="animation-delay: 0.4s"><img src="jpg (2).JPG"></div>
-        <div class="photo-frame" style="animation-delay: 0.6s"><img src="jpg (3).JPG"></div>
-        <div class="photo-frame" style="animation-delay: 0.8s"><img src="jpg (5).JPG"></div>
-        <div class="photo-frame" style="animation-delay: 1.0s"><img src="jpg (6).JPG"></div>
-        <div class="photo-frame" style="animation-delay: 1.2s"><img src="jpg (7).JPG"></div>
-        <div class="photo-frame" style="animation-delay: 1.4s"><img src="jpg (8).JPG"></div>
-        <div class="photo-frame" style="animation-delay: 1.6s"><img src="jpg (9).JPG"></div>
-        <div class="photo-frame" style="animation-delay: 1.8s"><img src="jpg (10).JPG"></div>
-        <div class="photo-frame" style="animation-delay: 2.0s"><img src="jpg (11).JPG"></div>
+    <h1>Happy Anniversary ❤️</h1>
+    
+    <div class="container">
+        <div class="card">
+            <img id="currentPhoto" src="master.jpg.JPG">
+        </div>
     </div>
 
-    <footer>Together Forever 💍</footer>
+    <p>స్క్రీన్ మీద క్లిక్ చేయండి! ✨</p>
+    <h2 style="color: pink; margin-top: 10px;">Ramana ❤️ Janu</h2>
+
+    <script>
+        // మీ ఫోటోల లిస్ట్ ఇక్కడ ఉంది
+        const photos = [
+            "master.jpg.JPG", "jpg (1).JPG", "jpg (2).JPG", "jpg (3).JPG", 
+            "jpg (5).JPG", "jpg (6).JPG", "jpg (7).JPG", "jpg (8).JPG", 
+            "jpg (9).JPG", "jpg (10).JPG", "jpg (11).JPG"
+        ];
+        let index = 0;
+
+        function changePhoto() {
+            index = (index + 1) % photos.length;
+            const img = document.getElementById('currentPhoto');
+            
+            // ఫోటో మారేటప్పుడు యానిమేషన్
+            img.style.opacity = 0;
+            setTimeout(() => {
+                img.src = photos[index];
+                img.style.opacity = 1;
+            }, 200);
+
+            // హార్ట్ ఎఫెక్ట్స్ సృష్టించడం
+            createHeart();
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 2 + 2) + 's';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 3000);
+        }
+    </script>
 </body>
 </html>
