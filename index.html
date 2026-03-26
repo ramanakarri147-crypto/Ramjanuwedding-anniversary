@@ -3,113 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Anniversary - Ramana & Janu</title>
+    <title>Happy Anniversary Ramana & Janu</title>
     <style>
+        * { box-sizing: border-box; }
         body { 
             margin: 0; 
-            background: #0a001a; 
+            background: #000; 
             color: white; 
-            text-align: center; 
-            font-family: 'Arial Black', sans-serif; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             overflow-x: hidden;
         }
-
-        /* Background Effects */
-        body::before {
-            content: "";
+        
+        /* Magical Background */
+        .stars {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle, rgba(255,0,119,0.1) 0%, transparent 80%);
+            background: radial-gradient(circle at center, #1b0033 0%, #000 100%);
             z-index: -1;
         }
 
+        header {
+            padding: 40px 20px;
+            animation: fadeInDown 2s;
+        }
+
         h1 { 
-            margin-top: 30px; 
+            font-size: 2.2em; 
             color: #ff0077; 
-            text-shadow: 0 0 15px #ff0077;
-            font-size: 1.8em; 
-            padding: 10px;
+            text-shadow: 0 0 20px #ff0077; 
+            margin-bottom: 5px;
         }
 
-        .gallery { 
-            display: flex; 
-            flex-wrap: wrap; 
-            justify-content: center; 
-            padding: 15px; 
-            gap: 15px; 
+        .sub-text { color: gold; font-size: 1.2em; letter-spacing: 2px; }
+
+        /* Photo Grid */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 15px;
+            padding: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
         }
 
-        .photo-frame { 
+        .photo-frame {
             position: relative;
-            width: 140px; /* ఫోన్ లో నీట్ గా ఉండటానికి */
-            height: 200px;
-            border: 3px solid gold; 
-            border-radius: 15px; 
-            overflow: hidden; 
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
-            transition: transform 0.4s, box-shadow 0.4s;
-            animation: fadeIn 1.5s ease-in;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            animation: fadeInUp 1s ease backwards;
+            aspect-ratio: 3/4;
         }
 
-        .photo-frame:hover { 
-            transform: scale(1.1) rotate(2deg); 
-            box-shadow: 0 0 25px gold;
-            z-index: 10;
+        .photo-frame img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 0.5s;
         }
 
-        img { 
-            width: 100%; 
-            height: 100%; 
-            object-fit: cover; 
+        .photo-frame:hover img { transform: scale(1.1); }
+
+        /* Master Photo Special Style */
+        .master-frame {
+            grid-column: 1 / -1;
+            max-width: 400px;
+            margin: 20px auto;
+            border: 3px solid gold;
+            box-shadow: 0 0 30px gold;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+        /* Animations */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Laptop/Desktop కోసం మార్పులు */
-        @media (min-width: 600px) {
-            h1 { font-size: 3em; }
-            .photo-frame { width: 220px; height: 300px; }
-        }
-
-        .footer-text {
-            margin: 40px 0;
-            color: pink;
-            font-size: 1.2em;
-            letter-spacing: 2px;
-            animation: glow 2s infinite alternate;
-        }
-
-        @keyframes glow {
-            from { text-shadow: 0 0 5px #ff0077; }
-            to { text-shadow: 0 0 20px #ff0077, 0 0 30px #ff0077; }
+        footer { padding: 50px 20px; color: #ff0077; font-size: 1.5em; animation: pulse 2s infinite; }
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(1.1); opacity: 1; }
         }
     </style>
 </head>
 <body>
-
-    <h1>Happy Wedding Anniversary! ❤️</h1>
-    <p style="color: #00d4ff;">Ramana ❤️ Janu</p>
+    <div class="stars"></div>
+    <header>
+        <h1>Happy Wedding Anniversary ❤️</h1>
+        <div class="sub-text">Ramana & Janu</div>
+    </header>
 
     <div class="gallery">
-        <div class="photo-frame"><img src="jpg (1).JPG"></div>
-        <div class="photo-frame"><img src="jpg (2).JPG"></div>
-        <div class="photo-frame"><img src="jpg (3).JPG"></div>
-        <div class="photo-frame"><img src="jpg (5).JPG"></div>
-        <div class="photo-frame"><img src="jpg (6).JPG"></div>
-        <div class="photo-frame"><img src="jpg (7).JPG"></div>
-        <div class="photo-frame"><img src="jpg (8).JPG"></div>
-        <div class="photo-frame"><img src="jpg (9).JPG"></div>
-        <div class="photo-frame"><img src="jpg (10).JPG"></div>
-        <div class="photo-frame"><img src="jpg (11).JPG"></div>
-        <div class="photo-frame" style="width: 90%; max-width: 400px; height: auto; aspect-ratio: 16/9;">
-            <img src="master.jpg.JPG">
-        </div>
+        <div class="photo-frame master-frame"><img src="master.jpg.JPG"></div>
+        <div class="photo-frame" style="animation-delay: 0.2s"><img src="jpg (1).JPG"></div>
+        <div class="photo-frame" style="animation-delay: 0.4s"><img src="jpg (2).JPG"></div>
+        <div class="photo-frame" style="animation-delay: 0.6s"><img src="jpg (3).JPG"></div>
+        <div class="photo-frame" style="animation-delay: 0.8s"><img src="jpg (5).JPG"></div>
+        <div class="photo-frame" style="animation-delay: 1.0s"><img src="jpg (6).JPG"></div>
+        <div class="photo-frame" style="animation-delay: 1.2s"><img src="jpg (7).JPG"></div>
+        <div class="photo-frame" style="animation-delay: 1.4s"><img src="jpg (8).JPG"></div>
+        <div class="photo-frame" style="animation-delay: 1.6s"><img src="jpg (9).JPG"></div>
+        <div class="photo-frame" style="animation-delay: 1.8s"><img src="jpg (10).JPG"></div>
+        <div class="photo-frame" style="animation-delay: 2.0s"><img src="jpg (11).JPG"></div>
     </div>
 
-    <div class="footer-text">Forever Together 💍</div>
-
+    <footer>Together Forever 💍</footer>
 </body>
 </html>
