@@ -3,53 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wedding Anniversary - First Step</title>
+    <title>Anniversary Orbiting Magic</title>
     <style>
-        body { 
-            margin: 0; background: #000; display: flex; 
-            justify-content: center; align-items: center; 
-            height: 100vh; overflow: hidden; 
+        body { margin: 0; background: #000; overflow: hidden; display: flex; justify-content: center; align-items: center; height: 100vh; font-family: 'Arial Black', sans-serif; cursor: pointer; }
+        
+        #scene { position: relative; width: 320px; height: 320px; transform-style: preserve-3d; }
+        
+        /* మాస్టర్ ఫోటో ఫ్రేమ్ (Rainbow Border) */
+        .master-frame {
+            position: absolute; top: 50%; left: 50%; width: 120px; height: 120px;
+            transform: translate(-50%, -50%); border-radius: 50%; overflow: hidden;
+            border: 4px solid gold; box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            opacity: 0; transition: 0.8s; visibility: hidden; z-index: 5;
         }
+        .master-frame.show { opacity: 1; visibility: visible; }
+        .master-frame img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
 
-        /* రెయిన్బో (Rainbow) బోర్డర్ కోసం ఒక అవుటర్ సర్కిల్ */
-        .rainbow-circle {
-            position: relative; width: 280px; height: 280px; 
-            border-radius: 50%; overflow: hidden; 
-            box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
-        }
-
-        /* బోర్డర్ చుట్టూ తిరిగే రంగులు (Rotating Colors) */
+        /* రెయిన్బో (Rainbow) బోర్డర్ ఎఫెక్ట్ */
         .rainbow-circle::before {
-            content: ""; position: absolute; width: 400px; height: 400px;
-            top: -60px; left: -60px;
+            content: ""; position: absolute; width: 200px; height: 200px; top: -40px; left: -40px;
             background: conic-gradient(red, orange, yellow, green, blue, indigo, violet, red);
-            animation: rotateBorder 3s linear infinite;
+            animation: rotateRainbow 3s linear infinite;
+        }
+        @keyframes rotateRainbow { 100% { transform: rotate(360deg); } }
+
+        /* తిరిగే ఫోటోల స్టైల్ (Photo Orbiting Style) */
+        .photo-frame {
+            position: absolute; top: 50%; left: 50%; width: 45px; height: 45px;
+            border-radius: 50%; overflow: hidden; border: 2px solid gold;
+            transform: translate(-50%, -130px) rotate(-10deg);
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+            transition: 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            opacity: 0; visibility: hidden; animation: orbitAnimation 6s linear infinite;
+        }
+        .photo-frame.show { opacity: 1; visibility: visible; }
+        .photo-frame img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+
+        /* ఆర్బిటింగ్ యానిమేషన్ (Orbiting Animation) */
+        @keyframes orbitAnimation {
+            0% { transform: translate(-50%, -130px) rotate(0deg); }
+            100% { transform: translate(-50%, -130px) rotate(360deg); }
         }
 
-        /* లోపల ఫోటో ఫ్రేమ్ */
-        .photo-inner {
-            position: absolute; width: 260px; height: 260px;
-            top: 10px; left: 10px; border-radius: 50%;
-            background: black; overflow: hidden;
-        }
+        .text-hint { position: absolute; bottom: 20px; color: gold; font-size: 0.8rem; pointer-events: none; animation: blink 1.2s infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
 
-        /* ఫేస్ కట్ అవ్వకుండా మాస్టర్ ఇమేజ్ (master.jpg.JPG) */
-        img { 
-            width: 100%; height: 100%; object-fit: contain; 
-            border-radius: 50%; 
-        }
-
-        /* బోర్డర్ రొటేషన్ యానిమేషన్ (Rotation Animation) */
-        @keyframes rotateBorder {
-            100% { transform: rotate(360deg); }
-        }
     </style>
 </head>
-<body>
-    <div class="rainbow-circle">
-        <div class="photo-inner">
-            <img src="master.jpg.JPG" alt="Ramana & Janu">
+<body onclick="handleMagic()">
+
+    <div id="scene">
+        <div class="master-frame rainbow-circle" id="master">
+            <img src="master.jpg.JPG" alt="Master Pic">
         </div>
-    </div>
+        
+        </div>
+
+    <div class="text-hint">టచ్ చేసి మ్యాజిక్ చూడండి! ✨</div>
+
+    <script>
+        const photos = ["jpg (1).JPG", "jpg (2).JPG", "jpg (3).JPG", "jpg (5).JPG", "jpg (6).JPG", "jpg (7).JPG", "jpg (8).JPG", "jpg (9).JPG", "jpg (10).JPG", "jpg (11).JPG"];
+        let clickCount = 0;
+        let orbitingPhotosIdx = 0;
+
+        function handleMagic() {
+            const master = document.getElementById('master');
+            const scene = document.getElementById('scene');
+            
+            clickCount++;
+            
+            if (clickCount === 1) {
+                // 1. First click shows the master photo
+                master.classList.add('show');
+            } else if (clickCount > 1) {
+                // 2. Next clicks show other photos orbiting
+                if (orbitingPhotosIdx < photos.length) {
+                    createOrbitingPhoto(photos[orbitingPhotosIdx], orbitingPhotosIdx);
+                    orbitingPhotosIdx++;
+                }
+            }
+        }
+
+        function createOrbitingPhoto(src, index) {
+            const frame = document.createElement('div');
+            frame.className = 'photo-frame show';
+            
+            // ఫోటోలు వేర్వేరు వేగంతో తిరగడానికి యానిమేషన్ సమయం మార్చడం
+            const delay = (index % 3 + 1) * 2; // ప్రతి ఫోటోకి ఒక కొత్త వేగం (delay)
+            frame.style.animationDelay = `-${delay}s`;
+            
+            const img = document.createElement('img');
+            img.src = src;
+            frame.appendChild(img);
+            
+            document.getElementById('scene').appendChild(frame);
+        }
+    </script>
 </body>
 </html>
