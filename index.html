@@ -3,127 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>An Anniversary Magic ❤️</title>
+    <title>Wedding Anniversary - First Step</title>
     <style>
-        body {
-            margin: 0; background: #000; color: white;
-            display: flex; flex-direction: column; align-items: center;
-            justify-content: center; height: 100vh;
-            font-family: 'Times New Roman', serif; overflow: hidden;
-            perspective: 2000px; /* 3D Effect కోసం */
-        }
-        
-        /* Magical Background */
-        .stars { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; background: radial-gradient(circle, #20002c, #000); }
-        .stars::after {
-            content: ""; position: absolute; width: 2px; height: 2px; background: white;
-            box-shadow: 10vw 20vh 1px white, 30vw 50vh 2px gold, 70vw 80vh 1px white, 90vw 10vh 2px white;
-            animation: twinkle 5s infinite;
+        body { 
+            margin: 0; background: #000; display: flex; 
+            justify-content: center; align-items: center; 
+            height: 100vh; overflow: hidden; 
         }
 
-        h1 { 
-            font-size: 1.6rem; color: #ff0077; text-shadow: 0 0 20px #ff0077; 
-            margin-bottom: 20px; animation: glow 2s infinite; 
+        /* రెయిన్బో (Rainbow) బోర్డర్ కోసం ఒక అవుటర్ సర్కిల్ */
+        .rainbow-circle {
+            position: relative; width: 280px; height: 280px; 
+            border-radius: 50%; overflow: hidden; 
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
         }
 
-        /* 3D Container */
-        .container {
-            position: relative; width: 200px; height: 300px;
-            transform-style: preserve-3d;
-            transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
-        }
-        
-        /* ఫోటో ఫ్రేమ్ స్టైల్ */
-        .photo-frame {
-            position: absolute; width: 100%; height: 100%;
-            border-radius: 15px; border: 3px solid gold;
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
-            overflow: hidden; backface-visibility: hidden;
-            background: #222; transition: box-shadow 0.5s;
-        }
-        
-        img { width: 100%; height: 100%; object-fit: cover; }
-        
-        /* Floating Text Effects */
-        .flying {
-            position: absolute; color: white; opacity: 0;
-            font-size: 20px; text-shadow: 0 0 10px white;
-        }
-        @keyframes flyAway {
-            0% { transform: translateY(0) scale(1) rotate(0); opacity: 1; }
-            100% { transform: translateY(-100vh) scale(2) rotate(360deg); opacity: 0; }
+        /* బోర్డర్ చుట్టూ తిరిగే రంగులు (Rotating Colors) */
+        .rainbow-circle::before {
+            content: ""; position: absolute; width: 400px; height: 400px;
+            top: -60px; left: -60px;
+            background: conic-gradient(red, orange, yellow, green, blue, indigo, violet, red);
+            animation: rotateBorder 3s linear infinite;
         }
 
-        /* 3D యానిమేషన్ రకాలు */
-        .container.design1 { transform: rotateY(0deg) translateZ(100px); }
-        .container.design2 { transform: rotateY(180deg) translateZ(-100px); }
-        .container.design3 { transform: rotateX(90deg) translateY(-100px); }
-        .container.design DESIGN4 { transform: rotateX(-90deg) translateY(100px); }
-        .container.design5 { transform: rotateY(90deg) translateX(100px); }
-        .container.design6 { transform: rotateY(-90deg) translateX(-100px); }
+        /* లోపల ఫోటో ఫ్రేమ్ */
+        .photo-inner {
+            position: absolute; width: 260px; height: 260px;
+            top: 10px; left: 10px; border-radius: 50%;
+            background: black; overflow: hidden;
+        }
 
+        /* ఫేస్ కట్ అవ్వకుండా మాస్టర్ ఇమేజ్ (master.jpg.JPG) */
+        img { 
+            width: 100%; height: 100%; object-fit: contain; 
+            border-radius: 50%; 
+        }
+
+        /* బోర్డర్ రొటేషన్ యానిమేషన్ (Rotation Animation) */
+        @keyframes rotateBorder {
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
-<body onclick="magicalEffect()">
-    <div class="stars"></div>
-    <h1>Happy Anniversary ❤️ Janu</h1>
-    
-    <div class="container design1" id="magicContainer">
-        <div class="photo-frame" style="transform: rotateY(0deg) translateZ(100px);">
-            <img id="frontPhoto" src="master.jpg.JPG">
-        </div>
-        <div class="photo-frame" style="transform: rotateY(180deg) translateZ(100px);">
-            <img src="jpg (1).JPG">
-        </div>
-        <div class="photo-frame" style="transform: rotateY(90deg) translateZ(100px);">
-            <img src="jpg (2).JPG">
-        </div>
-        <div class="photo-frame" style="transform: rotateY(-90deg) translateZ(100px);">
-            <img src="jpg (3).JPG">
-        </div>
-        <div class="photo-frame" style="transform: rotateX(90deg) translateZ(100px);">
-            <img src="jpg (5).JPG">
-        </div>
-        <div class="photo-frame" style="transform: rotateX(-90deg) translateZ(100px);">
-            <img src="jpg (6).JPG">
+<body>
+    <div class="rainbow-circle">
+        <div class="photo-inner">
+            <img src="master.jpg.JPG" alt="Ramana & Janu">
         </div>
     </div>
-
-    <div style="color: pink; margin-top: 30px;">Tap The Magic Box! ✨</div>
-
-    <script>
-        const photos = ["master.jpg.JPG", "jpg (1).JPG", "jpg (2).JPG", "jpg (3).JPG", "jpg (5).JPG", "jpg (6).JPG", "jpg (7).JPG", "jpg (8).JPG", "jpg (9).JPG", "jpg (10).JPG", "jpg (11).JPG"];
-        let currentPhotoIndex = 0;
-        let currentDesignIndex = 1;
-        const totalDesigns = 6;
-
-        function magicalEffect() {
-            const container = document.getElementById('magicContainer');
-            
-            // 1. 3D డిజైన్ మార్చడం
-            currentDesignIndex = (currentDesignIndex % totalDesigns) + 1;
-            container.className = 'container design' + currentDesignIndex;
-            
-            // 2. ఫోటో మార్చడం
-            currentPhotoIndex = (currentPhotoIndex + 1) % photos.length;
-            document.getElementById('frontPhoto').src = photos[currentPhotoIndex];
-            
-            // 3. యానిమేటెడ్ టెక్స్ట్ ఎఫెక్ట్ (Click చేసినప్పుడు)
-            createFlyingText();
-        }
-
-        function createFlyingText() {
-            const words = ["Love", "Joy", "Forever", "Janu", "Ramana", "Together", "Happy", "2024"];
-            const text = document.createElement('div');
-            text.className = 'flying';
-            text.innerText = words[Math.floor(Math.random() * words.length)];
-            text.style.left = Math.random() * 100 + 'vw';
-            text.style.top = Math.random() * 100 + 'vh';
-            text.style.animation = 'flyAway 2s ease-out forwards';
-            document.body.appendChild(text);
-            setTimeout(() => text.remove(), 2000);
-        }
-    </script>
 </body>
 </html>
